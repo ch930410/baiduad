@@ -1,10 +1,10 @@
 package com.gstory.baiduad.full
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.baidu.mobads.sdk.api.FullScreenVideoAd
-import com.baidu.mobads.sdk.api.FullScreenVideoAdListener
-import com.gstory.baiduad.utils.BaiduLogUtil
 import com.gstory.baiduad.BaiduAdEventPlugin
+import com.gstory.baiduad.utils.BaiduLogUtil
 
 
 /**
@@ -20,7 +20,7 @@ object BaiduFullScreenAd : FullScreenVideoAd.FullScreenListener {
 
     private var codeId: String? = null
     private var appSid: String? = null
-    private var bidFloor: Int? = null
+    private var bidFloor: Int = 0
     private var useSurfaceView: Boolean? = false
 
     fun load(context: Context, params: Map<*, *>) {
@@ -32,12 +32,11 @@ object BaiduFullScreenAd : FullScreenVideoAd.FullScreenListener {
         loadFullScreenVideoAd()
     }
 
+    @SuppressLint("StaticFieldLeak")
     private fun loadFullScreenVideoAd() {
         fullScreenVideoAd = FullScreenVideoAd(context, codeId, this, useSurfaceView!!)
         //设置广告的底价，单位：分（仅支持bidding模式）
-        if (bidFloor != null) {
-            fullScreenVideoAd?.setBidFloor(bidFloor)
-        }
+        fullScreenVideoAd?.setBidFloor(bidFloor)
         //支持动态设置APPSID，该信息可从移动联盟获得
         if(!appSid.isNullOrEmpty()){
             fullScreenVideoAd?.setAppSid(appSid)

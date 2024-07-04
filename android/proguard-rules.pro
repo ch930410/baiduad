@@ -1,4 +1,6 @@
+# 告诉 ProGuard 忽略所有警告信息，不输出警告日志
 -ignorewarnings
+# 禁止输出关于 com.baidu.mobads.sdk.api 包及其子包的警告信息
 -dontwarn com.baidu.mobads.sdk.api.**
 -keepclassmembers class * extends android.app.Activity {
    public void *(android.view.View);
