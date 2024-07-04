@@ -35,7 +35,7 @@ object BaiduFullScreenAd : FullScreenVideoAd.FullScreenListener {
     private fun loadFullScreenVideoAd() {
         fullScreenVideoAd = FullScreenVideoAd(context, codeId, this, useSurfaceView!!)
         //设置广告的底价，单位：分（仅支持bidding模式）
-        if(!bidFloor.isNullOrEmpty()){
+        if (bidFloor != null) {
             fullScreenVideoAd?.setBidFloor(bidFloor)
         }
         //支持动态设置APPSID，该信息可从移动联盟获得
