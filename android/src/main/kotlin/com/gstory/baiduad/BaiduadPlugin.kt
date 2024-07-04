@@ -11,6 +11,7 @@ import com.baidu.mobads.sdk.api.MobadsPermissionSettings
 import com.gstory.baiduad.banner.BaiduBannerAdViewFactory
 import com.gstory.baiduad.interstitial.BaiduInterstitialAd
 import com.gstory.baiduad.native.BaiduNativeAdViewFactory
+import com.gstory.baiduad.full.BaiduFullScreenAd
 import com.gstory.baiduad.reward.BaiduRewardAd
 import com.gstory.baiduad.splash.BaiduSplashAdViewFactory
 import com.gstory.baiduad.utils.BaiduLogUtil
@@ -131,7 +132,16 @@ class BaiduadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         } else if (call.method == "showInterstitialAd") {
             BaiduInterstitialAd.showInterstitialAd()
             result.success(true)
-        } else {
+             //预加载全屏广告
+        } else if (call.method == "loadFullScreenAd") {
+            BaiduFullScreenAd.load(applicationContext!!, call.arguments as Map<*, *>)
+            result.success(true)
+            //显示全屏广告
+        }else if (call.method == "showFullScreenAd") {
+            BaiduFullScreenAd.showAd()
+            result.success(true)
+            //预加载插屏广告
+        }else {
             result.notImplemented()
         }
     }
